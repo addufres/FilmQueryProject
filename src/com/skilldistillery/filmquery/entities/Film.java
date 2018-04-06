@@ -135,7 +135,8 @@ public class Film {
 	public void setSpecialfeatures(String specialfeatures) {
 		this.specialfeatures = specialfeatures;
 	}
-@Override
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ID = ");
@@ -160,7 +161,7 @@ public class Film {
 		builder.append(rating);
 		builder.append("\n Special Features = ");
 		builder.append(specialfeatures);
-		
+
 		return builder.toString();
 	}
 
@@ -172,6 +173,9 @@ public class Film {
 		result = prime * result + id;
 		return result;
 	}
+
+
+
 
 	@Override
 	public boolean equals(Object obj) {

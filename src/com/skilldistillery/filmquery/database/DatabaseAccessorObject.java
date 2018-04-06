@@ -160,4 +160,63 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return cast;
 	}
+
+	@Override
+	public List<Film> getFilmBySearch(String word) throws SQLException {
+		List<Film> films = new ArrayList<>();
+		// CONNECT TO DATABASE
+		Connection conn = DriverManager.getConnection(URL, user, pass);
+		// SQL TEXT TO QUERY WITH
+		String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
+		// PASS INTO PREPARESTATEMENT(TEXT)
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		// DECLARE AND INITIALIZE RESULTSET
+		String word2 = "%"+word+"%";
+		stmt.setString(1, word2);
+		stmt.setString(2, word2);
+		ResultSet rs = stmt.executeQuery();
+		// PRINT RESULTSET
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String title = rs.getString(2);
+				String description = rs.getString(3);
+				Date releaseYear = rs.getDate(4);
+				int languageId = rs.getInt(5);
+				int rentalDuration = rs.getInt(6);
+				double rentalRate = rs.getDouble(7);
+				int length = rs.getInt(8);
+				double replacementCost = rs.getDouble(9);
+				String rating = rs.getString(10);
+				String specialfeatures = rs.getString(11);
+				Film film = new Film(id, title, description, releaseYear, languageId, rentalDuration, rentalRate, length,
+						replacementCost, rating, specialfeatures, getActorsByFilmId(id));
+				System.out.println(film);
+				films.add(film);
+			}
+
+		// CLOSE UTILITIES
+		rs.close();
+		stmt.close();
+		conn.close();
+		return films;
+	}
+
+	@Override
+	public String getLanguage(Film film) {
+		String lang = "";
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = "SELECT f.language_id, l.name FROM film f JOIN language l ON f.language_id = l.id WHERE f.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, film.getId());
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				StringBuilder sb = new StringBuilder(rs.getString(2));
+				return sb.toString();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lang;
+	}
 }
