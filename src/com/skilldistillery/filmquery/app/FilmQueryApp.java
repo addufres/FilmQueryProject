@@ -63,6 +63,21 @@ public class FilmQueryApp {
 				Film film = db.getFilmById(filmId);
 				if (filmId > 0) {
 					printFilm(film);
+					choice = -1;
+					INNER: while (choice != 1) {
+						System.out.println("\t\t\n\nPlease make another selection: 1, or 2\n1. Return to main menu.\n"
+								+ "2. View all film details.");
+						choice = input.nextInt();
+						switch (choice) {
+						case 1:
+							break INNER;
+						case 2:
+							printAllFields(film);
+							break INNER;
+						default:
+							break;
+						}
+					}
 					break;
 				} else {
 					System.out.println("Film Not Found!");
@@ -82,6 +97,22 @@ public class FilmQueryApp {
 					for (Film f : films) {
 						printFilm(f);
 					}
+					choice = -1;
+					INNER: while (choice != 1) {
+						System.out.println("\t\t\n\nPlease make another selection: 1, or 2\n1. Return to main menu.\n"
+								+ "2. View all film details.");
+						choice = input.nextInt();
+						switch (choice) {
+						case 1:
+							break INNER;
+						case 2:
+							for(Film f : films)
+							printAllFields(f);
+							break INNER;
+						default:
+							break;
+						}
+					}
 					break;
 				} else {
 					System.out.println("Film Not Found!");
@@ -94,16 +125,31 @@ public class FilmQueryApp {
 				System.out.println("Incorrect choice make another selection.");
 				break;
 			}
-//			System.out.println("\t\t\n\nPlease make another selection: 1, or 2\n1. Return to main menu.\n"
-//					+ "2. View all film details.");
 
 		}
 
 	}
 
 	private void printFilm(Film film) {
-		System.out.println(
-				"Title = " + film.getTitle() + "\nYear = " + film.getReleaseYear() + "\nRating = " + film.getRating()
-						+ "\nDescription = " + film.getDescription() + "\n Language = " + db.getLanguage(film) + "\n Cast = " + db.getActorsByFilmId(film.getId()) + "\n");
+		System.out.println("Title = " + film.getTitle() + "\nYear = " + film.getReleaseYear() + "\nRating = "
+				+ film.getRating() + "\nDescription = " + film.getDescription() + "\n Language = "
+				+ db.getLanguage(film) + "\n Cast = " + db.getActorsByFilmId(film.getId()) + "\n");
+	}
+
+	private void printAllFields(Film film) {
+		StringBuilder sb = new StringBuilder("ID = " + film.getId());
+		sb.append("\nTitle = " + film.getTitle());
+		sb.append("\nDescription = " + film.getDescription());
+		sb.append("\nRelease Year = " + film.getReleaseYear());
+		sb.append("\nLanguage ID = " + film.getLanguageId());
+		sb.append("\nLanguage = " + db.getLanguage(film));
+		sb.append("\nRental Duration = " + film.getRentalDuration());
+		sb.append("\nRental Rate = " + film.getRentalRate());
+		sb.append("\nLength = " + film.getLength());
+		sb.append("\nReplacement Cost = " + film.getReplacementCost());
+		sb.append("\nRating = " + film.getRating());
+		sb.append("\nSpecial Features = " + film.getSpecialfeatures());
+		sb.append("\nCast = " + film.getCast());
+		System.out.println(sb);
 	}
 }
