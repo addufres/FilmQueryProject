@@ -3,6 +3,9 @@ package com.skilldistillery.filmquery.entities;
 import java.sql.Date;
 import java.util.List;
 
+import com.skilldistillery.filmquery.database.DatabaseAccessor;
+import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+
 public class Film {
 	private int id;
 	private String title;
@@ -138,29 +141,10 @@ public class Film {
 
 	@Override
 	public String toString() {
+		DatabaseAccessor db = new DatabaseAccessorObject();
 		StringBuilder builder = new StringBuilder();
-		builder.append("ID = ");
-		builder.append(id);
-		builder.append("\n Title = ");
-		builder.append(title);
-		builder.append("\n Description = ");
-		builder.append(description);
-		builder.append("\n Release Year = ");
-		builder.append(releaseYear);
-		builder.append("\n Language ID = ");
-		builder.append(languageId);
-		builder.append("\n Rental Duration = ");
-		builder.append(rentalDuration);
-		builder.append("\n Rental Rate = ");
-		builder.append(rentalRate);
-		builder.append("\n Length = ");
-		builder.append(length);
-		builder.append("\n Replacement Cost = ");
-		builder.append(replacementCost);
-		builder.append("\n Rating = ");
-		builder.append(rating);
-		builder.append("\n Special Features = ");
-		builder.append(specialfeatures);
+		builder.append("Title = " + getTitle() + "\nYear = " + getReleaseYear() + "\nRating = " + getRating()
+		+ "\nDescription = " + getDescription() + "\n Language = " + db.getLanguage(this) + "\n Cast = " + db.getActorsByFilmId(getId()) + "\n");
 
 		return builder.toString();
 	}
