@@ -50,6 +50,7 @@ public class FilmQueryApp {
 		OUTER: while (choice != 3) {
 			System.out.println("\n\nPlease make a selection: 1, 2 , or 3\n1. Look up a film by its id.\n"
 					+ "2. Look up a film by a search keyword.\n" + "3. Exit the application.");
+			
 			choice = input.nextInt();
 			input.nextLine();
 			switch (choice) {
@@ -106,6 +107,7 @@ public class FilmQueryApp {
 						case 1:
 							break INNER;
 						case 2:
+							
 							for(Film f : films)
 							printAllFields(f);
 							break INNER;

@@ -48,7 +48,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				int id = filmId;
 				String title = rs.getString(2);
 				String description = rs.getString(3);
-				Date releaseYear = rs.getDate(4);
+				short releaseYear = rs.getShort(4);
 				int languageId = rs.getInt(5);
 				int rentalDuration = rs.getInt(6);
 				double rentalRate = rs.getDouble(7);
@@ -104,7 +104,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					int filmId = rs.getInt(1);
 					String title = rs.getString(2);
 					String desc = rs.getString(3);
-					Date releaseYear = rs.getDate(4);
+					short releaseYear = rs.getShort(4);
 					int langId = rs.getInt(5);
 					int rentDur = rs.getInt(6);
 					double rate = rs.getDouble(7);
@@ -180,7 +180,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				int id = rs.getInt(1);
 				String title = rs.getString(2);
 				String description = rs.getString(3);
-				Date releaseYear = rs.getDate(4);
+				short releaseYear = rs.getShort(4);
 				int languageId = rs.getInt(5);
 				int rentalDuration = rs.getInt(6);
 				double rentalRate = rs.getDouble(7);

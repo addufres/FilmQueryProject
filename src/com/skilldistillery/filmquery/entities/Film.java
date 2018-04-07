@@ -10,7 +10,7 @@ public class Film {
 	private int id;
 	private String title;
 	private String description;
-	private Date releaseYear;
+	private short releaseYear;
 	private int languageId;
 	private int rentalDuration;
 	private double rentalRate;
@@ -32,7 +32,7 @@ public class Film {
 
 
 
-	public Film(int id, String title, String description, Date releaseYear, int languageId, int rentalDuration,
+	public Film(int id, String title, String description, short releaseYear, int languageId, int rentalDuration,
 			double rentalRate, int length, double replacementCost, String rating, String specialfeatures, List<Actor> cast) {
 		super();
 		this.id = id;
@@ -75,11 +75,11 @@ public class Film {
 		this.description = description;
 	}
 
-	public Date getReleaseYear() {
+	public short getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(Date releaseYear) {
+	public void setReleaseYear(short releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
